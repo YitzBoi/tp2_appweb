@@ -1,8 +1,8 @@
 {
   "copyFiles": [
     {
-      "from": "backend/db.default.json",
-      "to": "backend/db.json"
+      "from": "server/db.default.json",
+      "to": "server/db.json"
     }
   ],
   "copyFilesSettings": {
