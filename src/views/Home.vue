@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MenuComponent from './menuComponent.vue'
+import MenuComponent from '@/components/MenuComponent.vue'
 // @ is an alias to /src
 
 export default {

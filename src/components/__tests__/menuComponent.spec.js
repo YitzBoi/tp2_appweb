@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import MenuComponent from '@/components/MenuComponent.vue'
 
-describe('HelloWorld.vue', () => {
+describe('MenuComponent.vue', () => {
   test('test non implémenté', async () => {
     throw new Error('Test non implémenté.')
   })
