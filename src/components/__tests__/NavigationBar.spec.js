@@ -1,7 +1,7 @@
 import { shallowMount, RouterLinkStub } from '@vue/test-utils'
 import NavigationBar from '@/components/NavigationBar.vue'
 
-jest.mock('@/views/Posts.vue')
+jest.mock('@/views/Home.vue')
 
 describe('NavigationBar.vue', () => {
   test('Doit contenir un lien sur la page des publications.', async () => {
@@ -17,7 +17,7 @@ describe('NavigationBar.vue', () => {
       .wrappers.map(routerLink => routerLink.props().to)
 
     expect(routerLinks).toContainEqual({
-      name: 'Posts'
+      name: 'Home'
     })
   })
   test('Doit contenir un lien sur la page à propos.', async () => {
@@ -31,7 +31,7 @@ describe('NavigationBar.vue', () => {
       .wrappers.map(routerLink => routerLink.props().to)
 
     expect(routerLinks).toContainEqual({
-      name: 'About'
+      name: 'Leaderboard'
     })
   })
 })
