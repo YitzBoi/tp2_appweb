@@ -1,14 +1,16 @@
 <template>
   <div
-    class="container mx-auto border rounded-lg border-warning p-5 m-5 bg-info text-white"
+    class="container mx-auto border rounded-lg border-success p-5 m-5 text-white"
+    style="background-color: #e3f2fd"
   >
-    <label class="row">Votre nom:</label>
+    <label class="row" style="color:#42b983">Votre nom:</label>
     <input v-model="playerName" type="text" class="row form-control" />
 
-    <label class="row">Votre vaisseau:</label>
+    <label class="row" style="color:#42b983">Votre vaisseau:</label>
     <div>
-      <select class="row form-control" v-model="shipName">
+      <select class="row form-control" v-model="shipName" style="color:#42b983">
         <option
+          style="color:#42b983"
           v-for="ship in ships"
           v-bind:key="ship.id"
           v-bind:value="ship.name"
