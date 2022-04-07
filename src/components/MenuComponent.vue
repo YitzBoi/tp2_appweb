@@ -30,8 +30,8 @@
     <router-link
       v-else
       v-bind:to="{
-        name: 'Mission', //nom de la route
-        params: { playerName: playerName, shipName: shipName }
+        name: 'Mission',
+        props: { playerName: playerName, shipName: shipName }
       }"
       ><button class="btn btn-success m-3">
         Débuter la partie
