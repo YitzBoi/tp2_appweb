@@ -27,16 +27,9 @@
       width="20"
     />
 
-    <router-link
-      v-else
-      v-bind:to="{
-        name: 'Mission',
-        props: { playerName: playerName, shipName: shipName }
-      }"
-      ><button class="btn btn-success m-3">
-        Débuter la partie
-      </button></router-link
-    >
+    <button v-on:click="sendToMission()" v-else class="btn btn-success m-3">
+      Débuter la partie
+    </button>
   </div>
 </template>
 
@@ -49,6 +42,14 @@ export default {
       ships: [],
       shipName: '',
       isLoading: true
+    }
+  },
+  methods: {
+    sendToMission () {
+      this.$router.push({
+        name: 'Mission',
+        params: { playerName: this.playerName, shipName: this.shipName }
+      })
     }
   },
   async created () {
