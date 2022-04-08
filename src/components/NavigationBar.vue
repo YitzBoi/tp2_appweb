@@ -3,7 +3,7 @@
     <router-link style="color:#42b983" v-bind:to="{ name: 'Home' }"
       >Home</router-link
     >
-    <router-link style="color:#42b983" v-bind:to="{ name: 'Leaderboard' }"
+    <router-link style="color:#42b983" v-bind:to="{ name: 'Score' }"
       >Leaderboard</router-link
     >
   </nav>

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Leaderboard />
+    <LeaderboardComponent />
   </div>
 </template>
 
 <script>
-import Leaderboard from '@/components/LeaderboardComponent.vue'
+import LeaderboardComponent from '@/components/LeaderboardComponent.vue'
 
 export default {
   name: 'Score',
-  components: { Leaderboard }
+  components: { LeaderboardComponent }
 }
 </script>
 <style lang="css" scoped></style>
