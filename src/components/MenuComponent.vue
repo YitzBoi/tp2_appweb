@@ -8,12 +8,12 @@
 
     <label class="row" style="color:#42b983">Votre vaisseau:</label>
     <div>
-      <select class="row form-control" v-model="shipName" style="color:#42b983">
+      <select class="row form-control" v-model="ship" style="color:#42b983">
         <option
           style="color:#42b983"
           v-for="ship in ships"
           v-bind:key="ship.id"
-          v-bind:value="ship.name"
+          v-bind:value="ship"
         >
           {{ ship.name }}
         </option>
@@ -40,7 +40,7 @@ export default {
     return {
       playerName: '',
       ships: [],
-      shipName: '',
+      ship: {},
       isLoading: true
     }
   },
@@ -48,13 +48,13 @@ export default {
     sendToMission () {
       this.$router.push({
         name: 'Mission',
-        params: { playerName: this.playerName, shipName: this.shipName }
+        params: { playerName: this.playerName, ship: this.ship }
       })
     }
   },
   async created () {
     this.ships = await shipsService.getShips()
-    this.shipName = this.ships[0].name
+    this.ship = this.ships[0]
     this.isLoading = false
   }
 }

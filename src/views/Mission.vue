@@ -1,9 +1,12 @@
 <template>
-  <div></div>
+  <div>
+    <PlayerStatsComponent />
+  </div>
 </template>
 
 <script>
-export default {}
+import PlayerStatsComponent from '../components/playerStatsComponent.vue'
+export default { components: { PlayerStatsComponent } }
 </script>
 
 <style lang="scss" scoped></style>
