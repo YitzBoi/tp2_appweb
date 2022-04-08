@@ -27,7 +27,7 @@
       width="20"
     />
 
-    <button v-on:click="sendToMission()" v-else class="btn btn-success m-3">
+    <button @click="sendToMission()" v-else class="btn btn-success m-3">
       Débuter la partie
     </button>
   </div>
