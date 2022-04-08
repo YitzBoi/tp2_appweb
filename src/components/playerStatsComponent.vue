@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>{{ this.playerName }}</p>
-    <p>{{ this.ship.name }}</p>
+    <p style="color:#42b983">{{ this.playerName }}</p>
+    <p style="color:#42b983">{{ this.ship.name }}</p>
   </div>
 </template>
 
