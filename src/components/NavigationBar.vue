@@ -1,7 +1,11 @@
 <template>
-  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    <router-link v-bind:to="{ name: 'Home' }">Home</router-link>
-    <router-link v-bind:to="{ name: 'Leaderboard' }">Leaderboard</router-link>
+  <nav class="navbar navbar-light" style="background-color: #202325;">
+    <router-link style="color:#42b983" v-bind:to="{ name: 'Home' }"
+      >Home</router-link
+    >
+    <router-link style="color:#42b983" v-bind:to="{ name: 'Leaderboard' }"
+      >Leaderboard</router-link
+    >
   </nav>
 </template>
 
