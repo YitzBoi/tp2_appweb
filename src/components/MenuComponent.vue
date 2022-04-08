@@ -1,19 +1,28 @@
 <template>
   <div
     class="container mx-auto border rounded-lg border-success p-5 m-5 text-white"
-    style="background-color: #e3f2fd"
+    style="background-color: #202325"
   >
     <label class="row" style="color:#42b983">Votre nom:</label>
-    <input v-model="playerName" type="text" class="row form-control" />
+    <input
+      v-model="playerName"
+      type="text"
+      style="color:#42b983; background-color: #141414"
+      class="mb-5 row form-control border-success"
+    />
 
     <label class="row" style="color:#42b983">Votre vaisseau:</label>
     <div>
-      <select class="row form-control" v-model="shipName" style="color:#42b983">
+      <select
+        class="mb-5 row form-control border-success"
+        v-model="ship"
+        style="color:#42b983; background-color: #141414"
+      >
         <option
-          style="color:#42b983"
+          style="color:#42b983; background-color: #141414"
           v-for="ship in ships"
           v-bind:key="ship.id"
-          v-bind:value="ship.name"
+          v-bind:value="ship"
         >
           {{ ship.name }}
         </option>
@@ -27,16 +36,9 @@
       width="20"
     />
 
-    <router-link
-      v-else
-      v-bind:to="{
-        name: 'Mission', //nom de la route
-        params: { playerName: playerName, shipName: shipName }
-      }"
-      ><button class="btn btn-success m-3">
-        Débuter la partie
-      </button></router-link
-    >
+    <button @click="sendToMission()" v-else class="btn btn-success m-3">
+      Débuter la partie
+    </button>
   </div>
 </template>
 
@@ -47,13 +49,21 @@ export default {
     return {
       playerName: '',
       ships: [],
-      shipName: '',
+      ship: {},
       isLoading: true
+    }
+  },
+  methods: {
+    sendToMission () {
+      this.$router.push({
+        name: 'Mission',
+        params: { playerName: this.playerName, ship: this.ship }
+      })
     }
   },
   async created () {
     this.ships = await shipsService.getShips()
-    this.shipName = this.ships[0].name
+    this.ship = this.ships[0]
     this.isLoading = false
   }
 }
