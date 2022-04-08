@@ -33,7 +33,7 @@ describe('MenuComponent.vue', () => {
 
     expect(routerPush).toHaveBeenCalledWith({
       name: 'Mission',
-      params: { playerName: this.playerName, shipName: this.shipName }
+      params: { playerName: this.playerName, ship: this.ship }
     })
   })
 })

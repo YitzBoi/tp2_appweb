@@ -17,7 +17,7 @@ describe('NavigationBar.vue', () => {
       .wrappers.map(routerLink => routerLink.props().to)
 
     expect(routerLinks).toContainEqual({
-      name: 'Posts'
+      name: 'Mission'
     })
   })
   test('Doit contenir un lien sur la page à propos.', async () => {
@@ -31,7 +31,7 @@ describe('NavigationBar.vue', () => {
       .wrappers.map(routerLink => routerLink.props().to)
 
     expect(routerLinks).toContainEqual({
-      name: 'About'
+      name: 'Score'
     })
   })
 })
