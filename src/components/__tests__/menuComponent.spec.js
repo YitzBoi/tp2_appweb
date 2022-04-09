@@ -13,10 +13,20 @@ beforeEach(() => {
   ships = [...shipsJsonFake]
   jest.clearAllMocks()
   resetAllWhenMocks()
-  shipsService.getShips().mockResolvedValue(ships)
+  shipsService.getShips.mockResolvedValue(ships)
 })
 
 describe('MenuComponent.vue', () => {
+  test('Dans le menu, une liste de vaisseaux doit être affichée', async () => {
+    const wrapper = await shallowMount(MenuComponent)
+
+    const shipList = wrapper
+      .findAllComponents('select')
+      .wrappers.map(option => option.text)
+
+    expect(shipList).toStrictEqual(ships)
+  })
+
   test('Lors du clic du bouton, les données du joueur doivent être redirigées sur la page Mission', async () => {
     const routerPush = jest.fn()
     const wrapper = await shallowMount(MenuComponent, {
@@ -33,7 +43,7 @@ describe('MenuComponent.vue', () => {
 
     expect(routerPush).toHaveBeenCalledWith({
       name: 'Mission',
-      params: { playerName: this.playerName, ship: this.ship }
+      params: { playerName: '', ship: ships[0] }
     })
   })
 })
