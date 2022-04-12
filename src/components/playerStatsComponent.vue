@@ -7,7 +7,7 @@
     <b-container id="progressbar" class="rounded">
       <b-row>
         <b-progress-bar
-          class="rounded bg-success"
+          class="rounded bg-success progress-bar-striped progress-bar-animated"
           :max="maxHealth"
           :value="currentHealth"
           :label="`${((currentHealth / maxHealth) * 100).toFixed(2)}%`"
