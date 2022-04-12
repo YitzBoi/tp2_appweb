@@ -37,14 +37,6 @@ export default {
       maxHealth: 100,
       currentHealth: 100
     }
-  },
-  created () {
-    this.was_attacked(20)
-  },
-  methods: {
-    was_attacked: function (damage) {
-      this.currentHealth -= damage
-    }
   }
 }
 </script>
