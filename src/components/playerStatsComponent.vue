@@ -4,18 +4,16 @@
     <p style="color:#42b983" class="col-6">{{ this.playerRank }}</p>
     <p style="color:#42b983" class="col-6">{{ this.playerCredit }} CG</p>
     <p style="color:#42b983" class="col-12">{{ this.ship.name }}</p>
-    <div class="progress col-12">
-      <div
-        class="progress-bar bg-success"
-        role="progressbar"
-        :style="{ width: (currentHealth * 100) / maxHealth + '%' }"
-        :aria-valuenow="(currentHealth * 100) / maxHealth"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        {{ (currentHealth * 100) / maxHealth }}%
-      </div>
-    </div>
+    <b-container id="progressbar" class="rounded">
+      <b-row>
+        <b-progress-bar
+          class="rounded bg-success"
+          :max="maxHealth"
+          :value="currentHealth"
+          :label="`${((currentHealth / maxHealth) * 100).toFixed(2)}%`"
+        ></b-progress-bar>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -49,6 +47,7 @@ export default {
   border-radius: 20px;
   padding-bottom: 10px;
 }
-.healthBar {
+#progressbar {
+  background-color: white;
 }
 </style>
