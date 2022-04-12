@@ -1,28 +1,32 @@
 <template>
-  <b-container id="mainDiv" class="rounded">
+  <b-container id="mainDiv" class="rounded box">
     <b-row>
-      <b-col id="name" class="col-12 rounded"
-        ><p style="color:#fff">
+      <div id="name" class="rounded box-label">
+        <p style="color:#fff">
           {{ this.enemy.name }}
-        </p></b-col
-      >
+        </p>
+      </div>
+    </b-row>
+    <b-row>
       <p style="color:#42b983" class="col-6">{{ this.rank }}</p>
       <p style="color:#42b983" class="col-6">{{ this.enemy.credit }} CG</p>
-      <p style="color:#42b983" class="col-12">{{ this.enemy.ship.name }}</p>
-      <b-container
-        id="progressbar"
-        class="rounded progress-bar-warning progress-bar-striped progress-bar-animated"
-      >
-        <b-row>
-          <b-progress-bar
-            class="rounded bg-success progress-bar-striped progress-bar-animated"
-            :max="maxHealth"
-            :value="currentHealth"
-            :label="`${((currentHealth / maxHealth) * 100).toFixed(2)}%`"
-          ></b-progress-bar>
-        </b-row>
-      </b-container>
     </b-row>
+    <b-row>
+      <p style="color:#42b983" class="col-12">{{ this.enemy.ship.name }}</p>
+    </b-row>
+    <b-container
+      id="progressbar"
+      class="rounded progress-bar-warning progress-bar-striped progress-bar-animated"
+    >
+      <b-row>
+        <b-progress-bar
+          class="rounded bg-success progress-bar-striped progress-bar-animated"
+          :max="maxHealth"
+          :value="currentHealth"
+          :label="`${((currentHealth / maxHealth) * 100).toFixed(2)}%`"
+        ></b-progress-bar>
+      </b-row>
+    </b-container>
   </b-container>
 </template>
 
@@ -77,5 +81,12 @@ export default {
 
 p {
   font-size: 20px;
+}
+
+.box-label {
+  width: 25%;
+  margin-left: 2%;
+  position: relative;
+  top: -20px;
 }
 </style>
