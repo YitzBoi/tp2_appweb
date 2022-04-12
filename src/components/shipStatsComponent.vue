@@ -3,11 +3,11 @@
     <b-row>
       <b-col id="name" class="col-12 rounded"
         ><p style="color:#fff">
-          {{ this.playerName }}
+          {{ this.name }}
         </p></b-col
       >
-      <p style="color:#42b983" class="col-6">{{ this.playerRank }}</p>
-      <p style="color:#42b983" class="col-6">{{ this.playerCredit }} CG</p>
+      <p style="color:#42b983" class="col-6">{{ this.experience }}</p>
+      <p style="color:#42b983" class="col-6">{{ this.credit }} CG</p>
       <p style="color:#42b983" class="col-12">{{ this.ship.name }}</p>
       <b-container
         id="progressbar"
@@ -30,10 +30,10 @@
 export default {
   data () {
     return {
-      playerName: this.$route.params.playerName,
+      name: this.$route.params.playerName,
       ship: this.$route.params.ship,
-      playerRank: 0,
-      playerCredit: 0,
+      experience: 0,
+      credit: 0,
       maxHealth: 100,
       currentHealth: 100
     }
