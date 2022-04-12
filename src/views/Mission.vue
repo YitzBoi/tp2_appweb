@@ -1,10 +1,12 @@
 <template>
   <div class="container-fluid">
     <b-row>
-      <ActionsComponent class="col-9" />
-      <MissionInfosComponent class="col-3" />
-      <PlayerStatsComponent class="col-6" />
-      <EnemyStatsComponent class="col-6" />
+      <ActionsComponent class="component col-7" />
+      <MissionInfosComponent class="component col-3" />
+    </b-row>
+    <b-row>
+      <PlayerStatsComponent class="component col-5" />
+      <EnemyStatsComponent class="component col-5" />
     </b-row>
   </div>
 </template>
@@ -24,4 +26,10 @@ export default {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.component {
+  margin-top: 5%;
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>

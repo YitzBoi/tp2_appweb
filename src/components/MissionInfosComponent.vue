@@ -1,22 +1,22 @@
 <template>
-  <b-container id="mainDiv">
+  <b-container id="mainDiv" class="rounded box">
     <b-row>
-      <b-col id="name" class="col-12 rounded">
+      <div id="name" class="rounded box-label">
         <p style="color:#fff">
           Mission en cours
         </p>
-      </b-col>
-      <b-col class="col-12">
-        <p style="color:#42b983" class="col-12">
-          {{ this.level }}/{{ this.maxLevel }}
-        </p>
-      </b-col>
-      <b-col class="col-12">
-        <p style="color:#42b983" class="col-12">
-          Objectif: Survivre à {{ this.maxLevel }} missions en obtenant le plus
-          de CG.
-        </p>
-      </b-col>
+      </div>
+    </b-row>
+    <b-row>
+      <p style="color:#42b983" class="col-12">
+        {{ this.level }}/{{ this.maxLevel }}
+      </p>
+    </b-row>
+    <b-row>
+      <p style="color:#42b983" class="col-12">
+        Objectif: Survivre à {{ this.maxLevel }} missions en obtenant le plus de
+        CG.
+      </p>
     </b-row>
   </b-container>
 </template>
@@ -53,5 +53,12 @@ export default {
 
 p {
   font-size: 20px;
+}
+
+.box-label {
+  width: 25%;
+  margin-left: 2%;
+  position: relative;
+  top: -20px;
 }
 </style>
