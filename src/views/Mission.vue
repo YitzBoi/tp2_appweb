@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import PlayerStatsComponent from '../components/PPPPlayerStatsComponent.vue'
+import PlayerStatsComponent from '../components/PlayerStatsComponent.vue'
 import EnemyStatsComponent from '../components/EnemyStatsComponent.vue'
 import MissionInfosComponent from '../components/MissionInfosComponent.vue'
 import ActionsComponent from '../components/ActionsComponent.vue'
