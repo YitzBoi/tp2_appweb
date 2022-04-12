@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PlayerStatsComponent from '../components/playerStatsComponent.vue'
+import PlayerStatsComponent from '../components/PlayerStatsComponent.vue'
 export default { components: { PlayerStatsComponent } }
 </script>
 
