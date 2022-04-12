@@ -6,7 +6,7 @@
           {{ this.name }}
         </p></b-col
       >
-      <p style="color:#42b983" class="col-6">{{ this.experience }}</p>
+      <p style="color:#42b983" class="col-6">{{ this.rank }}</p>
       <p style="color:#42b983" class="col-6">{{ this.credit }} CG</p>
       <p style="color:#42b983" class="col-12">{{ this.ship.name }}</p>
       <b-container
@@ -32,10 +32,32 @@ export default {
     return {
       name: this.$route.params.playerName,
       ship: this.$route.params.ship,
-      experience: 0,
+      experience: 4,
+      rank: '',
       credit: 0,
       maxHealth: 100,
       currentHealth: 100
+    }
+  },
+  created () {
+    switch (this.experience) {
+      case 1:
+        this.rank = 'Beginner'
+        break
+      case 2:
+        this.rank = 'Novice'
+        break
+      case 3:
+        this.rank = 'Experienced'
+        break
+      case 4:
+        this.rank = 'Master'
+        break
+    }
+  },
+  methods: {
+    was_attacked: function (damage) {
+      this.currentHealth -= damage
     }
   }
 }
