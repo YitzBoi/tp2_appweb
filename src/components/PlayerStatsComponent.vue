@@ -1,10 +1,8 @@
 <template>
   <b-container id="mainDiv" class="rounded box">
-    <b-row>
+    <b-row v-on:attack="attack">
       <div id="name" class="rounded box-label">
-        <p style="color:#fff">
-          {{ this.name }}
-        </p>
+        <p style="color:#fff">{{ this.name }}</p>
       </div>
     </b-row>
     <b-row>
@@ -32,6 +30,14 @@
 
 <script>
 export default {
+  props: {
+    doAttack: {
+      type: Boolean
+    },
+    damage: {
+      type: Number
+    }
+  },
   data () {
     return {
       name: this.$route.params.playerName,
@@ -40,28 +46,59 @@ export default {
       rank: '',
       credit: 0,
       maxHealth: 100,
-      currentHealth: 100
+      currentHealth: 100,
+      chance: 0
     }
   },
   created () {
     switch (this.experience) {
       case 1:
         this.rank = 'Beginner'
+        this.chance = 20
         break
       case 2:
         this.rank = 'Novice'
+        this.chance = 35
         break
       case 3:
         this.rank = 'Experienced'
+        this.chance = 50
         break
       case 4:
         this.rank = 'Master'
+        this.chance = 70
         break
+    }
+  },
+  watch: {
+    doAttack: function () {
+      if (this.doAttack === true) {
+        this.attack()
+      }
+    },
+    damage: function () {
+      if (this.damage !== -1) {
+        console.log('pl: ' + this.damage)
+        this.was_attacked(this.damage)
+      }
     }
   },
   methods: {
     was_attacked: function (damage) {
-      this.currentHealth -= damage
+      if (damage > this.currentHealth) {
+        this.$emit('died', true)
+        this.currentHealth = 0
+      } else {
+        this.currentHealth -= damage
+      }
+      this.$emit('reset-vars', true)
+    },
+    attack: function () {
+      if (Math.floor(Math.random() * 101) < this.chance) {
+        this.$emit('player-attack', 3 + Math.floor(Math.random() * 4))
+      } else {
+        this.$emit('player-attack', 0)
+      }
     }
   }
 }

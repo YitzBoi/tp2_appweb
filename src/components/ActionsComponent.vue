@@ -1,7 +1,11 @@
 <template>
   <b-container class="rounded" id="mainDiv">
     <b-row>
-      <button type="button" class="col-3 btn btn-success">
+      <button
+        v-on:click="launch_fight()"
+        type="button"
+        class="col-3 btn btn-success"
+      >
         Combattre
       </button>
       <button type="button" class="col-3 btn btn-success">
@@ -15,7 +19,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    launch_fight: function () {
+      this.$emit('launch_fight')
+    }
+  }
+}
 </script>
 
 <style lang="css" scoped>

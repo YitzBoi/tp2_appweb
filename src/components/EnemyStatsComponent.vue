@@ -29,10 +29,25 @@
 <script>
 import { enemyService } from '../services/enemyService.js'
 export default {
+  props: {
+    doAttack: {
+      type: Boolean
+    },
+    damage: {
+      type: Number
+    }
+  },
   data () {
     return {
-      enemy: {},
-      rank: '',
+      enemy: {
+        id: 5188,
+        name: 'Ratts Tyerel',
+        credit: 95,
+        experience: 1,
+        ship: { id: 5380, name: 'Solar Sailer', vitality: 85 }
+      },
+      chance: 0,
+      rank: '1',
       maxHealth: 100,
       currentHealth: 100
     }
@@ -42,21 +57,51 @@ export default {
     switch (this.enemy.experience) {
       case 1:
         this.rank = 'Beginner'
+        this.chance = 20
         break
       case 2:
         this.rank = 'Novice'
+        this.chance = 35
         break
       case 3:
         this.rank = 'Experienced'
+        this.chance = 50
         break
       case 4:
         this.rank = 'Master'
+        this.chance = 70
         break
+    }
+  },
+  watch: {
+    doAttack: function () {
+      if (this.doAttack === true) {
+        this.attack()
+      }
+    },
+    damage: function () {
+      if (this.damage !== -1) {
+        console.log('en: ' + this.damage)
+        this.was_attacked(this.damage)
+      }
     }
   },
   methods: {
     was_attacked: function (damage) {
-      this.currentHealth -= damage
+      if (damage > this.currentHealth) {
+        this.$emit('died', false)
+        this.currentHealth = 0
+      } else {
+        this.currentHealth -= damage
+      }
+      this.$emit('reset-vars', false)
+    },
+    attack: function () {
+      if (Math.floor(Math.random() * 101) < this.chance) {
+        this.$emit('enemy-attack', 3 + Math.floor(Math.random() * 4))
+      } else {
+        this.$emit('enemy-attack', 0)
+      }
     }
   }
 }
