@@ -72,6 +72,8 @@ export default {
         this.chance = 70
         break
     }
+    this.currentHealth = this.enemy.ship.vitality
+    this.maxHealth = this.enemy.ship.vitality
   },
   watch: {
     doAttack: function () {
