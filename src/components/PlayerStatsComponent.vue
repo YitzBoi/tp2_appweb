@@ -36,6 +36,9 @@ export default {
     },
     damage: {
       type: Number
+    },
+    reward: {
+      type: Number
     }
   },
   data () {
@@ -78,8 +81,14 @@ export default {
     },
     damage: function () {
       if (this.damage !== -1) {
-        console.log('pl: ' + this.damage)
         this.was_attacked(this.damage)
+        this.$emit('reset-vars', true)
+      }
+    },
+    reward: function () {
+      if (this.reward !== -1) {
+        console.log('money')
+        this.credit += this.reward
       }
     }
   },
@@ -91,7 +100,6 @@ export default {
       } else {
         this.currentHealth -= damage
       }
-      this.$emit('reset-vars', true)
     },
     attack: function () {
       if (Math.floor(Math.random() * 101) < this.chance) {
