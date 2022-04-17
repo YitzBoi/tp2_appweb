@@ -1,24 +1,24 @@
 <template>
-  <b-container id="mainDiv" class="rounded box">
-    <b-row>
+  <div id="mainDiv" class="container rounded box">
+    <div class="row">
       <div id="name" class="rounded box-label">
         <p style="color:#fff">
           Mission en cours
         </p>
       </div>
-    </b-row>
-    <b-row>
+    </div>
+    <div class="row">
       <p style="color:#42b983" class="col-12">
         {{ this.level }}/{{ this.maxLevel }}
       </p>
-    </b-row>
-    <b-row>
+    </div>
+    <div class="row">
       <p style="color:#42b983" class="col-12">
         Objectif: Survivre à {{ this.maxLevel }} missions en obtenant le plus de
         CG.
       </p>
-    </b-row>
-  </b-container>
+    </div>
+  </div>
 </template>
 
 <script>

@@ -1,11 +1,11 @@
 <template>
-  <b-container class="rounded" id="mainDiv">
-    <b-row>
+  <div class="container rounded" id="mainDiv">
+    <div class="row">
       <div id="name" class="rounded box-label">
         <p style="color:#fff">Actions</p>
       </div>
-    </b-row>
-    <b-row>
+    </div>
+    <div class="row">
       <button type="button" class="col-3 btn btn-success">
         Combattre
       </button>
@@ -15,8 +15,8 @@
       <button type="button" class="col-3 btn btn-success">
         Terminer la mission et réparer le vaisseau
       </button>
-    </b-row>
-  </b-container>
+    </div>
+  </div>
 </template>
 
 <script>

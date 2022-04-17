@@ -1,33 +1,33 @@
 <template>
-  <b-container id="mainDiv" class="rounded box">
-    <b-row>
+  <div id="mainDiv" class="container rounded box">
+    <div class="row">
       <div id="name" class="rounded box-label">
         <p style="color:#fff">
           {{ this.name }}
         </p>
       </div>
-    </b-row>
-    <b-row>
+    </div>
+    <div class="row">
       <p style="color:#42b983" class="col-6">{{ this.rank }}</p>
       <p style="color:#42b983" class="col-6">{{ this.credit }} CG</p>
-    </b-row>
-    <b-row>
+    </div>
+    <div class="row">
       <p style="color:#42b983" class="col-12">{{ this.ship.name }}</p>
-    </b-row>
-    <b-container
+    </div>
+    <div
       id="progressbar"
-      class="rounded progress-bar-warning progress-bar-striped progress-bar-animated"
+      class="container rounded progress-bar-warning progress-bar-striped progress-bar-animated"
     >
-      <b-row>
+      <div class="row">
         <b-progress-bar
           class="rounded bg-success progress-bar-striped progress-bar-animated"
           :max="maxHealth"
           :value="currentHealth"
           :label="`${((currentHealth / maxHealth) * 100).toFixed(2)}%`"
         ></b-progress-bar>
-      </b-row>
-    </b-container>
-  </b-container>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
