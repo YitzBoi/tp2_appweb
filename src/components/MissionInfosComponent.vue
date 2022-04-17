@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <p style="color:#42b983" class="col-12">
-        {{ this.level }}/{{ this.maxLevel }}
+        {{ this.roundNb }}/{{ this.maxLevel }}
       </p>
     </div>
     <div class="row">
@@ -23,9 +23,13 @@
 
 <script>
 export default {
+  props: {
+    roundNb: {
+      type: Number
+    }
+  },
   data () {
     return {
-      level: 1,
       maxLevel: 5
     }
   },

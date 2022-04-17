@@ -2,16 +2,18 @@
   <div class="container-fluid">
     <b-row>
       <ActionsComponent @launch_fight="launch_fight" class="col-9" />
-      <MissionInfosComponent class="col-3" />
+      <MissionInfosComponent v-bind:roundNb="roundNb" class="col-3" />
       <PlayerStatsComponent
         v-bind:doAttack="playerShouldAttack"
         v-bind:damage="damageToPlayer"
+        v-bind:reward="enemyCredit"
         @player-attack="attack_enemy"
         @died="aCharacterWasKilled"
         @reset-vars="reset_vars"
         class="col-6"
       />
       <EnemyStatsComponent
+        v-bind:currentEnemy="enemy[this.roundNb - 1]"
         v-bind:doAttack="enemyShouldAttack"
         v-bind:damage="damageToEnemy"
         @enemy-attack="attack_player"
@@ -28,6 +30,7 @@ import PlayerStatsComponent from '../components/PlayerStatsComponent.vue'
 import EnemyStatsComponent from '../components/EnemyStatsComponent.vue'
 import MissionInfosComponent from '../components/MissionInfosComponent.vue'
 import ActionsComponent from '../components/ActionsComponent.vue'
+import { enemyService } from '../services/enemyService.js'
 export default {
   components: {
     PlayerStatsComponent,
@@ -37,13 +40,19 @@ export default {
   },
   data () {
     return {
+      enemy: [],
       playerShouldAttack: false,
       enemyShouldAttack: false,
       damageToEnemy: -1,
       damageToPlayer: -1,
       resetP: false,
-      resetE: false
+      resetE: false,
+      enemyCredit: -1,
+      roundNb: 1
     }
+  },
+  async created () {
+    this.enemy = await enemyService.getRandomCharactersList(5)
   },
   methods: {
     launch_fight () {
@@ -51,11 +60,9 @@ export default {
       this.playerShouldAttack = true
     },
     attack_enemy (nb) {
-      console.log('e ' + nb)
       this.damageToEnemy = nb
     },
     attack_player (nb) {
-      console.log('p ' + nb)
       this.damageToPlayer = nb
     },
     reset_vars (isPlayer) {
@@ -73,13 +80,15 @@ export default {
         this.resetE = false
       }
     },
-    aCharacterWasKilled (isPlayer) {
+    aCharacterWasKilled (isPlayer, money) {
       if (isPlayer) {
         // rest in peperonni mr player
         console.log('enemy wins!')
       } else {
         // pog
-        console.log('player wins!')
+        console.log('player wins! MONEY: ' + money)
+        this.enemyCredit = money
+        this.roundNb++
       }
     }
   }

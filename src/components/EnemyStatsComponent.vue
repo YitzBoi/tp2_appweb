@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { enemyService } from '../services/enemyService.js'
 export default {
   props: {
     doAttack: {
@@ -39,6 +38,9 @@ export default {
     },
     damage: {
       type: Number
+    },
+    currentEnemy: {
+      type: Object
     }
   },
   data () {
@@ -56,29 +58,6 @@ export default {
       currentHealth: 100
     }
   },
-  async created () {
-    this.enemy = await enemyService.getRandomCharacter()
-    switch (this.enemy.experience) {
-      case 1:
-        this.rank = 'Beginner'
-        this.chance = 20
-        break
-      case 2:
-        this.rank = 'Novice'
-        this.chance = 35
-        break
-      case 3:
-        this.rank = 'Experienced'
-        this.chance = 50
-        break
-      case 4:
-        this.rank = 'Master'
-        this.chance = 70
-        break
-    }
-    this.currentHealth = this.enemy.ship.vitality
-    this.maxHealth = this.enemy.ship.vitality
-  },
   watch: {
     doAttack: function () {
       if (this.doAttack === true) {
@@ -87,16 +66,38 @@ export default {
     },
     damage: function () {
       if (this.damage !== -1) {
-        console.log('en: ' + this.damage)
         this.was_attacked(this.damage)
       }
+    },
+    currentEnemy: function () {
+      this.enemy = this.currentEnemy
+      switch (this.enemy.experience) {
+        case 1:
+          this.rank = 'Beginner'
+          this.chance = 20
+          break
+        case 2:
+          this.rank = 'Novice'
+          this.chance = 35
+          break
+        case 3:
+          this.rank = 'Experienced'
+          this.chance = 50
+          break
+        case 4:
+          this.rank = 'Master'
+          this.chance = 70
+          break
+      }
+      this.currentHealth = this.enemy.ship.vitality
+      this.maxHealth = this.enemy.ship.vitality
     }
   },
   methods: {
     was_attacked: function (damage) {
       if (damage > this.currentHealth) {
-        this.$emit('died', false)
         this.currentHealth = 0
+        this.$emit('died', false, this.enemy.credit)
       } else {
         this.currentHealth -= damage
       }
