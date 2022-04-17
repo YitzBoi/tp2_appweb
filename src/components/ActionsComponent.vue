@@ -6,7 +6,11 @@
       </div>
     </div>
     <div class="row">
-      <button type="button" class="col-3 btn btn-success">
+      <button
+        type="button"
+        v-on:click="launch_fight()"
+        class="col-3 btn btn-success"
+      >
         Combattre
       </button>
       <button type="button" class="col-3 btn btn-success">
@@ -20,7 +24,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    launch_fight: function () {
+      this.$emit('launch_fight')
+    }
+  }
+}
 </script>
 
 <style lang="css" scoped>
