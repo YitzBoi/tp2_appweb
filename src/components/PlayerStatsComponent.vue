@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    was_attacked: function (damage) {
+    was_attacked (damage) {
       if (damage > this.currentHealth) {
         this.$emit('died', true)
         this.currentHealth = 0
@@ -101,11 +101,40 @@ export default {
         this.currentHealth -= damage
       }
     },
-    attack: function () {
+    attack () {
       if (Math.floor(Math.random() * 101) < this.chance) {
         this.$emit('player-attack', 3 + Math.floor(Math.random() * 4))
       } else {
         this.$emit('player-attack', 0)
+      }
+    },
+    async repair () {
+      const calculatedCost = (this.maxHealth - this.currentHealth) * 5
+      if (this.currentHealth > 0 && this.currentHealth < this.maxHealth) {
+        if (this.credit >= calculatedCost) {
+          this.credit -= calculatedCost
+          this.currentHealth = this.maxHealth
+          this.$emit('end_mission')
+        } else {
+          this.$bvModal.msgBoxOk(
+            "Vous n'avez pas assez de CG pour réparer votre vaisseau.",
+            {
+              okTitle: 'Ok',
+              bodyBgVariant: 'dark',
+              bodyTextVariant: 'success',
+              footerBgVariant: 'dark',
+              okVariant: 'success'
+            }
+          )
+        }
+      } else {
+        this.$bvModal.msgBoxOk("Votre vaisseau n'est pas endommagé!", {
+          okTitle: 'Ok',
+          bodyBgVariant: 'dark',
+          bodyTextVariant: 'success',
+          footerBgVariant: 'dark',
+          okVariant: 'success'
+        })
       }
     }
   }
