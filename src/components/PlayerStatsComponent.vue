@@ -2,7 +2,7 @@
   <div id="mainDiv" class="container rounded box pb-4">
     <div class="row" v-on:attack="attack">
       <div id="name" class="rounded box-label">
-        <p style="color:#fff">{{ this.name }}</p>
+        <p id="nameText" style="color:#fff">{{ this.name }}</p>
       </div>
     </div>
     <div class="row">
@@ -18,6 +18,7 @@
     >
       <div class="row">
         <b-progress-bar
+          id="prog-bar"
           class="rounded bg-success progress-bar-striped progress-bar-animated"
           :max="maxHealth"
           :value="currentHealth"

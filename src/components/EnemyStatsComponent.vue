@@ -70,6 +70,27 @@ export default {
       }
     },
     currentEnemy: function () {
+      this.changeEnemy()
+    }
+  },
+  methods: {
+    was_attacked: function (damage) {
+      if (damage > this.currentHealth) {
+        this.currentHealth = 0
+        this.$emit('died', false, this.enemy.credit)
+      } else {
+        this.currentHealth -= damage
+      }
+      this.$emit('reset-vars', false)
+    },
+    attack: function () {
+      if (Math.floor(Math.random() * 101) < this.chance) {
+        this.$emit('enemy-attack', 3 + Math.floor(Math.random() * 4))
+      } else {
+        this.$emit('enemy-attack', 0)
+      }
+    },
+    changeEnemy: function () {
       this.enemy = this.currentEnemy
       switch (this.enemy.experience) {
         case 1:
@@ -91,24 +112,6 @@ export default {
       }
       this.currentHealth = this.enemy.ship.vitality
       this.maxHealth = this.enemy.ship.vitality
-    }
-  },
-  methods: {
-    was_attacked: function (damage) {
-      if (damage > this.currentHealth) {
-        this.currentHealth = 0
-        this.$emit('died', false, this.enemy.credit)
-      } else {
-        this.currentHealth -= damage
-      }
-      this.$emit('reset-vars', false)
-    },
-    attack: function () {
-      if (Math.floor(Math.random() * 101) < this.chance) {
-        this.$emit('enemy-attack', 3 + Math.floor(Math.random() * 4))
-      } else {
-        this.$emit('enemy-attack', 0)
-      }
     }
   }
 }
