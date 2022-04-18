@@ -18,6 +18,7 @@
     >
       <div class="row">
         <b-progress-bar
+          id="prog-bar"
           class="rounded bg-success progress-bar-striped progress-bar-animated"
           :max="maxHealth"
           :value="currentHealth"

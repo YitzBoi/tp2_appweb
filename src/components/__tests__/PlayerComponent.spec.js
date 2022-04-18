@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import PlayerComponent from '@/components/PlayerStatsComponent.vue'
 import flushPromises from 'flush-promises'
 
@@ -39,7 +40,31 @@ describe('PlayerStatsComponent.vue', () => {
     expect(wrapper.text()).toContain('Executor')
   })
 
-  // test('La vie du joueur doit exister et etre a 100% au debut', async () => {})
+  test('La vie du joueur doit exister et etre a 100% au debut', async () => {
+    const wrapper = await mount(PlayerComponent, {
+      mocks: {
+        $router: {
+          push: () => {}
+        },
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await flushPromises()
+
+    let lifeBar = wrapper.find('#prog-bar')
+    // credit
+    expect(lifeBar.text).toContain('100 CG')
+  })
 
   // shits qui update et methode
   // test('La vie du joueur doit pouvoir changer en fonction des degats recus', async () => {})
