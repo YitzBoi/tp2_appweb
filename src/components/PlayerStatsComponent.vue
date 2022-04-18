@@ -108,14 +108,33 @@ export default {
         this.$emit('player-attack', 0)
       }
     },
-    repair () {
+    async repair () {
       const calculatedCost = (this.maxHealth - this.currentHealth) * 5
-      if (this.currentHealth > 0) {
+      if (this.currentHealth > 0 && this.currentHealth < this.maxHealth) {
         if (this.credit >= calculatedCost) {
           this.credit -= calculatedCost
           this.currentHealth = this.maxHealth
           this.$emit('end_mission')
-        } else console.log('you poor ass mfer')
+        } else {
+          this.$bvModal.msgBoxOk(
+            "Vous n'avez pas assez de CG pour réparer votre vaisseau.",
+            {
+              okTitle: 'Ok',
+              bodyBgVariant: 'dark',
+              bodyTextVariant: 'success',
+              footerBgVariant: 'dark',
+              okVariant: 'success'
+            }
+          )
+        }
+      } else {
+        this.$bvModal.msgBoxOk("Votre vaisseau n'est pas endommagé!", {
+          okTitle: 'Ok',
+          bodyBgVariant: 'dark',
+          bodyTextVariant: 'success',
+          footerBgVariant: 'dark',
+          okVariant: 'success'
+        })
       }
     }
   }
