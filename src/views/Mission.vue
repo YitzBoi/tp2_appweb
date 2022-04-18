@@ -105,6 +105,22 @@ export default {
         this.roundNb++
       }
     }
+  },
+  async beforeRouteLeave (to, from, next) {
+    const confirmed = await this.$bvModal.msgBoxConfirm(
+      'Voulez-vous vraiment quitter cette page? Votre partie sera perdue.',
+      {
+        cancelTitle: 'Annuler',
+        okTitle: 'Continuer',
+        bodyBgVariant: 'dark',
+        bodyTextVariant: 'success',
+        footerBgVariant: 'dark',
+        okVariant: 'success'
+      }
+    )
+    if (confirmed === true) {
+      next()
+    }
   }
 }
 </script>
