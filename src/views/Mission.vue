@@ -1,12 +1,19 @@
 <template>
   <div class="container-fluid">
     <b-row>
-      <ActionsComponent @launch_fight="launch_fight" class="col-9" />
+      <ActionsComponent
+        @launch_fight="launch_fight"
+        @end_mission="end_mission"
+        @repair_ship="repair_ship"
+        class="col-9"
+      />
       <MissionInfosComponent v-bind:roundNb="roundNb" class="col-3" />
       <PlayerStatsComponent
+        ref="playerStatsComponent"
         v-bind:doAttack="playerShouldAttack"
         v-bind:damage="damageToPlayer"
         v-bind:reward="enemyCredit"
+        @end_mission="end_mission"
         @player-attack="attack_enemy"
         @died="aCharacterWasKilled"
         @reset-vars="reset_vars"
@@ -64,6 +71,13 @@ export default {
     },
     attack_player (nb) {
       this.damageToPlayer = nb
+    },
+    end_mission () {
+      this.reset_vars(false)
+      this.roundNb++
+    },
+    repair_ship () {
+      this.$refs.playerStatsComponent.repair()
     },
     reset_vars (isPlayer) {
       if (isPlayer) {

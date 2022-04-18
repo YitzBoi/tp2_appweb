@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    was_attacked: function (damage) {
+    was_attacked (damage) {
       if (damage > this.currentHealth) {
         this.$emit('died', true)
         this.currentHealth = 0
@@ -101,11 +101,21 @@ export default {
         this.currentHealth -= damage
       }
     },
-    attack: function () {
+    attack () {
       if (Math.floor(Math.random() * 101) < this.chance) {
         this.$emit('player-attack', 3 + Math.floor(Math.random() * 4))
       } else {
         this.$emit('player-attack', 0)
+      }
+    },
+    repair () {
+      const calculatedCost = (this.maxHealth - this.currentHealth) * 5
+      if (this.currentHealth > 0) {
+        if (this.credit >= calculatedCost) {
+          this.credit -= calculatedCost
+          this.currentHealth = this.maxHealth
+          this.$emit('end_mission')
+        } else console.log('you poor ass mfer')
       }
     }
   }

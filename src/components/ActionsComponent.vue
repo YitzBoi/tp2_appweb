@@ -13,10 +13,18 @@
       >
         Combattre
       </button>
-      <button type="button" class="col-3 btn btn-success">
+      <button
+        type="button"
+        v-on:click="end_mission()"
+        class="col-3 btn btn-success"
+      >
         Terminer la mission
       </button>
-      <button type="button" class="col-3 btn btn-success">
+      <button
+        type="button"
+        v-on:click="repair_ship()"
+        class="col-3 btn btn-success"
+      >
         Terminer la mission et réparer le vaisseau
       </button>
     </div>
@@ -28,6 +36,12 @@ export default {
   methods: {
     launch_fight: function () {
       this.$emit('launch_fight')
+    },
+    end_mission: function () {
+      this.$emit('end_mission')
+    },
+    repair_ship: function () {
+      this.$emit('repair_ship')
     }
   }
 }

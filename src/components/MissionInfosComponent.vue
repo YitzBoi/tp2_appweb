@@ -32,12 +32,6 @@ export default {
     return {
       maxLevel: 5
     }
-  },
-  async created () {},
-  methods: {
-    ennemyKilled: function () {
-      this.level++
-    }
   }
 }
 </script>
