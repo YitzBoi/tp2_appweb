@@ -1,5 +1,5 @@
 <template>
-  <div id="mainDiv" class="container rounded box">
+  <div id="mainDiv" class="container rounded box pb-4">
     <div class="row">
       <div id="name" class="rounded box-label">
         <p style="color:#fff">
@@ -114,27 +114,4 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-#mainDiv {
-  background-color: rgb(32, 35, 37);
-  color: rgb(66, 185, 131);
-  padding-bottom: 20px;
-}
-
-#name {
-  background-color: rgb(0, 171, 34);
-  padding-top: 1%;
-  margin-bottom: 2%;
-}
-
-p {
-  font-size: 20px;
-}
-
-.box-label {
-  width: 25%;
-  margin-left: 2%;
-  position: relative;
-  top: -20px;
-}
-</style>
+<style lang="css" scoped></style>

@@ -32,11 +32,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-#mainDiv {
-  background-color: rgb(32, 35, 37);
-  color: rgb(66, 185, 131);
-  border-style: solid;
-}
 h2 {
   font-size: 40px;
 }

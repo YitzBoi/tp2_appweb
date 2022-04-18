@@ -1,32 +1,38 @@
 <template>
-  <div class="container rounded" id="mainDiv">
+  <div class="container rounded box" id="mainDiv">
     <div class="row">
       <div id="name" class="rounded box-label">
         <p style="color:#fff">Actions</p>
       </div>
     </div>
-    <div class="row">
-      <button
-        type="button"
-        v-on:click="launch_fight()"
-        class="col-3 btn btn-success"
-      >
-        Combattre
-      </button>
-      <button
-        type="button"
-        v-on:click="end_mission()"
-        class="col-3 btn btn-success"
-      >
-        Terminer la mission
-      </button>
-      <button
-        type="button"
-        v-on:click="repair_ship()"
-        class="col-3 btn btn-success"
-      >
-        Terminer la mission et réparer le vaisseau
-      </button>
+    <div class="row align-self-stretch pb-5">
+      <div class="col-4">
+        <button
+          type="button"
+          v-on:click="launch_fight()"
+          class="btn btn-success w-100 h-100"
+        >
+          Combattre
+        </button>
+      </div>
+      <div class="col-4">
+        <button
+          type="button"
+          v-on:click="end_mission()"
+          class="btn btn-success w-100 h-100"
+        >
+          Terminer la mission
+        </button>
+      </div>
+      <div class="col-4">
+        <button
+          type="button"
+          v-on:click="repair_ship()"
+          class="btn btn-success w-100 h-100"
+        >
+          Terminer la mission et réparer le vaisseau
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -47,32 +53,4 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-#mainDiv {
-  background-color: rgb(32, 35, 37);
-  color: rgb(66, 185, 131);
-  padding-bottom: 20px;
-}
-
-#name {
-  background-color: rgb(0, 171, 34);
-  padding-top: 1%;
-  margin-bottom: 2%;
-}
-
-button {
-  padding: 20px;
-  margin: auto;
-}
-
-p {
-  font-size: 20px;
-}
-
-.box-label {
-  width: 25%;
-  margin-left: 2%;
-  position: relative;
-  top: -20px;
-}
-</style>
+<style lang="css" scoped></style>

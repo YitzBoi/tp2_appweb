@@ -42,4 +42,28 @@ html {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.box-label {
+  width: auto;
+  padding-right: 2%;
+  padding-left: 2%;
+  margin-left: 2%;
+  position: relative;
+  top: -20px;
+}
+
+p {
+  font-size: 20px;
+}
+
+#name {
+  background-color: rgb(0, 171, 34);
+  padding-top: 1%;
+  margin-bottom: 2%;
+}
+
+#mainDiv {
+  background-color: rgb(32, 35, 37);
+  color: rgb(66, 185, 131);
+}
 </style>
