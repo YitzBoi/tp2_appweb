@@ -12,6 +12,12 @@
         </li>
       </ul>
     </div>
+    <img
+      v-if="isLoading"
+      src="@/assets/loadingWaiting.gif"
+      alt="Chargement..."
+      width="20"
+    />
   </div>
 </template>
 
