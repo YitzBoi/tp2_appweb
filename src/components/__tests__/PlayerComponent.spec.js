@@ -61,13 +61,68 @@ describe('PlayerStatsComponent.vue', () => {
 
     await flushPromises()
 
-    let lifeBar = wrapper.find('#prog-bar')
+    let lifeBar = wrapper.vm.currentHealth
     // credit
-    expect(lifeBar.text).toContain('100 CG')
+    expect(lifeBar).toBe(100)
   })
 
   // shits qui update et methode
-  // test('La vie du joueur doit pouvoir changer en fonction des degats recus', async () => {})
+  test('La vie du joueur doit pouvoir changer en fonction de degat recus', async () => {
+    const wrapper = await mount(PlayerComponent, {
+      mocks: {
+        $router: {
+          push: () => {}
+        },
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await flushPromises()
+
+    wrapper.vm.was_attacked(10)
+    wrapper.vm.was_attacked(10)
+
+    let lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(80)
+  })
+
+  test('La vie du joueur doit pouvoir changer plusieur fois en fonction des degats recus', async () => {
+    const wrapper = await mount(PlayerComponent, {
+      mocks: {
+        $router: {
+          push: () => {}
+        },
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await flushPromises()
+
+    wrapper.vm.was_attacked(10)
+
+    let lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(90)
+  })
 
   test('Les credits du joueur doit pouvoir changer en fonction des credit recus', async () => {
     const wrapper = await shallowMount(PlayerComponent, {

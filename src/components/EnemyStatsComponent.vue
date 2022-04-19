@@ -79,7 +79,7 @@ export default {
         this.currentHealth = 0
         this.$emit('died', false, this.enemy.credit)
       } else {
-        this.currentHealth -= damage
+        this.currentHealth -= (this.maxHealth * damage) / 100
       }
       this.$emit('reset-vars', false)
     },

@@ -128,6 +128,89 @@ describe('EnemyStatsComponent.vue', () => {
     // rank
     expect(wrapper.text()).toContain('Master')
   })
+
+  test("La vie de l'ennemi doit exister et etre a 100% au debut", async () => {
+    const wrapper = await mount(EnemyComponent)
+
+    await wrapper.setData({
+      enemy: {
+        id: 0,
+        name: 'Enemy Name',
+        credit: 11,
+        experience: 2,
+        ship: {
+          id: 1,
+          name: 'Ship Name',
+          vitality: 100
+        }
+      },
+      rank: 'Banane'
+    })
+
+    await flushPromises()
+
+    let lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(100)
+  })
+
+  // shits qui update et methode
+  test("La vie de l'ennemi doit pouvoir changer en fonction de degat recus", async () => {
+    const wrapper = await mount(EnemyComponent)
+
+    await wrapper.setData({
+      enemy: {
+        id: 0,
+        name: 'Enemy Name',
+        credit: 11,
+        experience: 2,
+        ship: {
+          id: 1,
+          name: 'Ship Name',
+          vitality: 100
+        }
+      },
+      rank: 'Banane'
+    })
+
+    await flushPromises()
+
+    wrapper.vm.was_attacked(10)
+
+    let lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(90)
+  })
+
+  test("La vie de l'ennemi doit pouvoir changer plusieur fois en fonction des degats recus", async () => {
+    const wrapper = await mount(EnemyComponent, {
+      mocks: {
+        $router: {
+          push: () => {}
+        },
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await flushPromises()
+
+    wrapper.vm.was_attacked(10)
+    wrapper.vm.was_attacked(10)
+
+    let lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(80)
+  })
+
   //emits
 
   test("L'ennemi doit pouvoir partager son attaque au parent", async () => {

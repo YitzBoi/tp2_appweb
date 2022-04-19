@@ -99,7 +99,7 @@ export default {
         this.$emit('died', true)
         this.currentHealth = 0
       } else {
-        this.currentHealth -= damage
+        this.currentHealth -= (this.maxHealth * damage) / 100
       }
     },
     attack () {
