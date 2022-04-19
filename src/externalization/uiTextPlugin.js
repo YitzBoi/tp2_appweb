@@ -1,5 +1,8 @@
 export const uiTextPlugin = {
-  welcomeMessage: 'Allo tout le monde !'
+  MissionInfos: {
+    MAX_ROUNDS: 5,
+    DEFAULT_ROUND: 1
+  }
 }
 
 // Plugin pour VueJs
