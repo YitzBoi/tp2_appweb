@@ -18,7 +18,7 @@
           ref="playerStatsComponent"
           v-bind:doAttack="playerShouldAttack"
           v-bind:damage="damageToPlayer"
-          v-bind:reward="enemyCredit"
+          v-bind:credit="credit"
           @end_mission="end_mission"
           @player-attack="attack_enemy"
           @died="aCharacterWasKilled"
@@ -45,6 +45,7 @@ import EnemyStatsComponent from '../components/EnemyStatsComponent.vue'
 import MissionInfosComponent from '../components/MissionInfosComponent.vue'
 import ActionsComponent from '../components/ActionsComponent.vue'
 import { enemyService } from '../services/enemyService.js'
+import { scoresService } from '../services/scoresService.js'
 export default {
   components: {
     PlayerStatsComponent,
@@ -57,12 +58,14 @@ export default {
       enemy: [],
       playerShouldAttack: false,
       enemyShouldAttack: false,
+      gameHasEnded: false,
       damageToEnemy: -1,
       damageToPlayer: -1,
       resetP: false,
       resetE: false,
-      enemyCredit: -1,
-      roundNb: 1
+      credit: 0,
+      roundNb: 1,
+      score: 0
     }
   },
   async created () {
@@ -81,7 +84,38 @@ export default {
     },
     end_mission () {
       this.reset_vars(false)
-      this.roundNb++
+      if (this.roundNb === 5) this.game_ended()
+      else {
+        this.roundNb++
+      }
+    },
+    async game_over () {
+      this.gameHasEnded = true
+      await this.$bvModal.msgBoxOk('Vous avez perdu la partie!', {
+        okTitle: 'Ok',
+        bodyBgVariant: 'dark',
+        bodyTextVariant: 'success',
+        footerBgVariant: 'dark',
+        okVariant: 'success'
+      })
+      this.$router.push({ name: 'Home' })
+    },
+    async game_ended () {
+      this.gameHasEnded = true
+      await this.$bvModal.msgBoxOk('Vous avez gagné la partie!', {
+        okTitle: 'Ok',
+        bodyBgVariant: 'dark',
+        bodyTextVariant: 'success',
+        footerBgVariant: 'dark',
+        okVariant: 'success'
+      })
+      await scoresService.postScore({
+        name: this.$route.params.playerName,
+        score: this.credit
+      })
+      this.$router.push({
+        name: 'Score'
+      })
     },
     repair_ship () {
       this.$refs.playerStatsComponent.repair()
@@ -103,30 +137,34 @@ export default {
     },
     aCharacterWasKilled (isPlayer, money) {
       if (isPlayer) {
-        // rest in peperonni mr player
-        console.log('enemy wins!')
+        this.game_over()
       } else {
-        // pog
-        console.log('player wins! MONEY: ' + money)
-        this.enemyCredit = money
-        this.roundNb++
+        this.credit += money
+        if (this.roundNb === 5) this.game_ended()
+        else {
+          this.roundNb++
+        }
       }
     }
   },
   async beforeRouteLeave (to, from, next) {
-    const confirmed = await this.$bvModal.msgBoxConfirm(
-      'Voulez-vous vraiment quitter cette page? Votre partie sera perdue.',
-      {
-        cancelTitle: 'Annuler',
-        okTitle: 'Continuer',
-        bodyBgVariant: 'dark',
-        bodyTextVariant: 'success',
-        footerBgVariant: 'dark',
-        okVariant: 'success'
-      }
-    )
-    if (confirmed === true) {
+    if (this.gameHasEnded) {
       next()
+    } else {
+      const confirmed = await this.$bvModal.msgBoxConfirm(
+        'Voulez-vous vraiment quitter cette page? Votre partie sera perdue.',
+        {
+          cancelTitle: 'Annuler',
+          okTitle: 'Continuer',
+          bodyBgVariant: 'dark',
+          bodyTextVariant: 'success',
+          footerBgVariant: 'dark',
+          okVariant: 'success'
+        }
+      )
+      if (confirmed === true) {
+        next()
+      }
     }
   }
 }
