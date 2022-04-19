@@ -47,10 +47,10 @@ export default {
     return {
       enemy: {
         id: 5188,
-        name: 'Ratts Tyerel',
+        name: 'Default',
         credit: 95,
         experience: 1,
-        ship: { id: 5380, name: 'Solar Sailer', vitality: 85 }
+        ship: { id: 5380, name: 'Default', vitality: 100 }
       },
       chance: 0,
       rank: '1',

@@ -2,14 +2,14 @@
   <div id="mainDiv" class="container rounded box">
     <div class="row">
       <div id="name" class="rounded box-label">
-        <p style="color:#fff">
+        <h2 style="color:#fff">
           Mission en cours
-        </p>
+        </h2>
       </div>
     </div>
     <div class="row">
       <p style="color:#42b983" class="col-12">
-        {{ this.roundNb }}/{{ this.maxLevel }}
+        {{ this.roundNb }}/{{ this.maxRounds }}
       </p>
     </div>
     <div class="row">
@@ -22,15 +22,17 @@
 </template>
 
 <script>
+import uiTextPlugin from '../externalization/uiTextPlugin'
 export default {
   props: {
     roundNb: {
-      type: Number
+      type: Number,
+      default: uiTextPlugin.MissionInfos.DEFAULT_ROUND
     }
   },
   data () {
     return {
-      maxLevel: 5
+      maxRounds: uiTextPlugin.MissionInfos.MAX_ROUNDS
     }
   }
 }
