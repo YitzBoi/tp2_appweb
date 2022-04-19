@@ -1,7 +1,20 @@
 {
   "ranking": [
-    { "id": 1, "name": "Yannick Mazières", "score": 500 },
-    { "id": 2, "name": "Jimmy Gilbert", "score": 495 }
+    {
+      "id": 1,
+      "name": "Yannick Mazières",
+      "score": 500
+    },
+    {
+      "id": 2,
+      "name": "Jimmy Gilbert",
+      "score": 495
+    },
+    {
+      "name": "Zackary",
+      "score": 100,
+      "id": 3
+    }
   ],
   "ships": [
     {

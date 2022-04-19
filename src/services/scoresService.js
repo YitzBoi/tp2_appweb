@@ -7,6 +7,11 @@ async function getScores () {
   return data
 }
 
+async function postScore (score) {
+  await axios.post(`${API}/ranking`, score)
+}
+
 export const scoresService = {
-  getScores
+  getScores,
+  postScore
 }

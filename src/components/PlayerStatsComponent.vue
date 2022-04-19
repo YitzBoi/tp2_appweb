@@ -38,7 +38,7 @@ export default {
     damage: {
       type: Number
     },
-    reward: {
+    credit: {
       type: Number
     }
   },
@@ -48,7 +48,6 @@ export default {
       ship: this.$route.params.ship,
       experience: 4,
       rank: '',
-      credit: 0,
       maxHealth: 100,
       currentHealth: 100,
       chance: 0
@@ -84,12 +83,6 @@ export default {
       if (this.damage !== -1) {
         this.was_attacked(this.damage)
         this.$emit('reset-vars', true)
-      }
-    },
-    reward: function () {
-      if (this.reward !== -1) {
-        console.log('money')
-        this.credit += this.reward
       }
     }
   },
