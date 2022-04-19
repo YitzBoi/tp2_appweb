@@ -2,9 +2,9 @@
   <div id="mainDiv" class="container rounded box pb-4">
     <div class="row">
       <div id="name" class="rounded box-label">
-        <p style="color:#fff">
+        <h3 style="color:#fff">
           {{ this.enemy.name }}
-        </p>
+        </h3>
       </div>
     </div>
     <div class="row">

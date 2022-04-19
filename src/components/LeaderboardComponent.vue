@@ -5,7 +5,7 @@
       class="w-50 mx-auto border rounded-lg border-success p-5 m-5"
       style="background-color: #202325"
     >
-      <h2 class="text-center">Leaderboard</h2>
+      <h3 class="text-center">Leaderboard</h3>
       <ul class="topBorder">
         <li v-for="score in scores" v-bind:key="score.score">
           {{ score.name }} - {{ score.score }} CG

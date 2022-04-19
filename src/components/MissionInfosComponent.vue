@@ -2,9 +2,9 @@
   <div id="mainDiv" class="container rounded box">
     <div class="row">
       <div id="name" class="rounded box-label">
-        <h2 style="color:#fff">
+        <h3 style="color:#fff">
           Mission en cours
-        </h2>
+        </h3>
       </div>
     </div>
     <div class="row">

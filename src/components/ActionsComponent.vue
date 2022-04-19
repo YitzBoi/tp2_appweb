@@ -2,7 +2,7 @@
   <div class="container rounded box" id="mainDiv">
     <div class="row">
       <div id="name" class="rounded box-label">
-        <p style="color:#fff">Actions</p>
+        <h3 style="color:#fff">Actions</h3>
       </div>
     </div>
     <div class="row align-self-stretch pb-5">

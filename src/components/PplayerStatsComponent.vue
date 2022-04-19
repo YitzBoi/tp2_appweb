@@ -2,7 +2,7 @@
   <div id="mainDiv" class="container rounded box pb-4">
     <div class="row" v-on:attack="attack">
       <div id="name" class="rounded box-label">
-        <p id="nameText" style="color:#fff">{{ this.name }}</p>
+        <h3 id="nameText" style="color:#fff">{{ this.name }}</h3>
       </div>
     </div>
     <div class="row">
