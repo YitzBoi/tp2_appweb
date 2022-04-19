@@ -210,7 +210,7 @@ describe('EnemyStatsComponent.vue', () => {
     expect(lifeBar).toBe(80)
   })
 
-  //emits
+  // emits
 
   test("L'ennemi doit pouvoir partager son attaque au parent", async () => {
     const wrapper = await shallowMount(EnemyComponent, {
