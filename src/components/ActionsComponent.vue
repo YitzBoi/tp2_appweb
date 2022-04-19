@@ -11,6 +11,7 @@
           type="button"
           v-on:click="launch_fight()"
           class="btn btn-success w-100 h-100"
+          id="launch_fight"
         >
           Combattre
         </button>
@@ -20,6 +21,7 @@
           type="button"
           v-on:click="end_mission()"
           class="btn btn-success w-100 h-100"
+          id="end_mission"
         >
           Terminer la mission
         </button>
@@ -29,6 +31,7 @@
           type="button"
           v-on:click="repair_ship()"
           class="btn btn-success w-100 h-100"
+          id="repair_ship"
         >
           Terminer la mission et réparer le vaisseau
         </button>
