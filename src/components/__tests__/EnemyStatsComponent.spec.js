@@ -1,5 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
-import { mount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import EnemyComponent from '@/components/EnemyStatsComponent.vue'
 import flushPromises from 'flush-promises'
 
@@ -149,7 +148,7 @@ describe('EnemyStatsComponent.vue', () => {
 
     await flushPromises()
 
-    let lifeBar = wrapper.vm.currentHealth
+    const lifeBar = wrapper.vm.currentHealth
     // credit
     expect(lifeBar).toBe(100)
   })
@@ -177,7 +176,7 @@ describe('EnemyStatsComponent.vue', () => {
 
     wrapper.vm.was_attacked(10)
 
-    let lifeBar = wrapper.vm.currentHealth
+    const lifeBar = wrapper.vm.currentHealth
     // credit
     expect(lifeBar).toBe(90)
   })
@@ -206,7 +205,7 @@ describe('EnemyStatsComponent.vue', () => {
     wrapper.vm.was_attacked(10)
     wrapper.vm.was_attacked(10)
 
-    let lifeBar = wrapper.vm.currentHealth
+    const lifeBar = wrapper.vm.currentHealth
     // credit
     expect(lifeBar).toBe(80)
   })
@@ -237,7 +236,7 @@ describe('EnemyStatsComponent.vue', () => {
     })
 
     await flushPromises()
-    let value = wrapper.emitted('enemy-attack')[0]
+    const value = wrapper.emitted('enemy-attack')[0]
 
     expect(wrapper.emitted('enemy-attack')).toBeTruthy()
     expect(value[0]).toBeGreaterThanOrEqual(0)
@@ -268,7 +267,7 @@ describe('EnemyStatsComponent.vue', () => {
     })
 
     await flushPromises()
-    let value = wrapper.emitted('reset-vars')[0]
+    const value = wrapper.emitted('reset-vars')[0]
 
     expect(wrapper.emitted('reset-vars')).toBeTruthy()
     expect(value[0]).toBeFalsy()
@@ -298,7 +297,7 @@ describe('EnemyStatsComponent.vue', () => {
     })
 
     await flushPromises()
-    let value = wrapper.emitted('died')[0]
+    const value = wrapper.emitted('died')[0]
 
     expect(wrapper.emitted('died')).toBeTruthy()
     expect(value[0]).toBeFalsy()

@@ -1,5 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
-import { mount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import PlayerComponent from '@/components/PlayerStatsComponent.vue'
 import flushPromises from 'flush-promises'
 
@@ -61,7 +60,7 @@ describe('PlayerStatsComponent.vue', () => {
 
     await flushPromises()
 
-    let lifeBar = wrapper.vm.currentHealth
+    const lifeBar = wrapper.vm.currentHealth
     // credit
     expect(lifeBar).toBe(100)
   })
@@ -91,7 +90,7 @@ describe('PlayerStatsComponent.vue', () => {
     wrapper.vm.was_attacked(10)
     wrapper.vm.was_attacked(10)
 
-    let lifeBar = wrapper.vm.currentHealth
+    const lifeBar = wrapper.vm.currentHealth
     // credit
     expect(lifeBar).toBe(80)
   })
@@ -119,7 +118,7 @@ describe('PlayerStatsComponent.vue', () => {
 
     wrapper.vm.was_attacked(10)
 
-    let lifeBar = wrapper.vm.currentHealth
+    const lifeBar = wrapper.vm.currentHealth
     // credit
     expect(lifeBar).toBe(90)
   })
@@ -153,7 +152,7 @@ describe('PlayerStatsComponent.vue', () => {
     expect(wrapper.text()).toContain('100 CG')
   })
 
-  //emits
+  // emits
 
   test('Le joueur doit pouvoir partager son attaque au parent', async () => {
     const wrapper = await shallowMount(PlayerComponent, {
@@ -179,7 +178,7 @@ describe('PlayerStatsComponent.vue', () => {
     })
 
     await flushPromises()
-    let value = wrapper.emitted('player-attack')[0]
+    const value = wrapper.emitted('player-attack')[0]
 
     expect(wrapper.emitted('player-attack')).toBeTruthy()
     expect(value[0]).toBeGreaterThanOrEqual(0)
@@ -210,7 +209,7 @@ describe('PlayerStatsComponent.vue', () => {
     })
 
     await flushPromises()
-    let value = wrapper.emitted('reset-vars')[0]
+    const value = wrapper.emitted('reset-vars')[0]
 
     expect(wrapper.emitted('reset-vars')).toBeTruthy()
     expect(value[0]).toBeTruthy()
@@ -240,7 +239,7 @@ describe('PlayerStatsComponent.vue', () => {
     })
 
     await flushPromises()
-    let value = wrapper.emitted('died')[0]
+    const value = wrapper.emitted('died')[0]
 
     expect(wrapper.emitted('died')).toBeTruthy()
     expect(value[0]).toBeTruthy()
