@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import Mission from '@/views/Mission.vue'
+import PlayerStatsComponent from '@/components/PlayerStatsComponent'
 import flushPromises from 'flush-promises'
-import { when, resetAllWhenMocks } from 'jest-when'
 import { scoresService } from '@/services/scoresService'
 
 jest.mock('@/services/scoresService')
@@ -16,13 +16,13 @@ describe('Mission.vue', () => {
   test("Launch_fight doit changer le prop d'attaque de player et de l'ennemi a True.", async () => {
     const wrapper = await shallowMount(Mission)
     await flushPromises()
-    expect(wrapper.vm.enemyShouldAttack).toBeFalsy
-    expect(wrapper.vm.playerShouldAttack).toBeFalsy
+    expect(wrapper.vm.enemyShouldAttack).toBeFalsy()
+    expect(wrapper.vm.playerShouldAttack).toBeFalsy()
 
     wrapper.vm.launch_fight()
 
-    expect(wrapper.vm.enemyShouldAttack).toBeTruthy
-    expect(wrapper.vm.playerShouldAttack).toBeTruthy
+    expect(wrapper.vm.enemyShouldAttack).toBeTruthy()
+    expect(wrapper.vm.playerShouldAttack).toBeTruthy()
   })
 
   test('attack_enemy doit changer le prop damageToEnemy.', async () => {
@@ -72,13 +72,13 @@ describe('Mission.vue', () => {
   })
 
   test('Game_over doit finir la partie et afficher une boite de texte.', async () => {
-    const msgBoxOk1 = jest.fn()
+    const msgBoxOk = jest.fn()
     const pushMock = jest.fn()
 
     const wrapper = await shallowMount(Mission, {
       mocks: {
         $bvModal: {
-          msgBoxOk: () => msgBoxOk1()
+          msgBoxOk: () => msgBoxOk()
         },
         $router: {
           push: () => pushMock()
@@ -90,18 +90,18 @@ describe('Mission.vue', () => {
 
     await wrapper.vm.game_over()
 
-    expect(msgBoxOk1).toHaveBeenCalled()
+    expect(msgBoxOk).toHaveBeenCalled()
     expect(pushMock).toHaveBeenCalled()
   })
 
   test('Game_ended doit finir la partie et afficher une boite de texte et appeler le service pour sauvegarder le score du joueur.', async () => {
-    const msgBoxOk1 = jest.fn()
+    const msgBoxOk = jest.fn()
     const pushMock = jest.fn()
 
     const wrapper = await shallowMount(Mission, {
       mocks: {
         $bvModal: {
-          msgBoxOk: () => msgBoxOk1()
+          msgBoxOk: () => msgBoxOk()
         },
         $router: {
           push: () => pushMock()
@@ -118,27 +118,18 @@ describe('Mission.vue', () => {
 
     await wrapper.vm.game_ended()
 
-    expect(msgBoxOk1).toHaveBeenCalled()
+    expect(msgBoxOk).toHaveBeenCalled()
     expect(pushMock).toHaveBeenCalled()
   })
 
-  test("repair_ship doit appeler playerComponent pour qu'il se reparer", async () => {
-    const playerMock = jest.fn()
+  test('repair_ship doit modifier shouldRepair pour que le prop du player soit modifié', async () => {
+    const wrapper = await shallowMount(Mission)
 
-    const wrapper = await shallowMount(Mission, {
-      mocks: {
-        $refs: {
-          playerStatsComponent: {
-            repair: () => playerMock()
-          }
-        }
-      }
-    })
     await flushPromises()
 
     await wrapper.vm.repair_ship()
 
-    expect(playerMock).toHaveBeenCalled()
+    expect(wrapper.vm.shouldRepair).toBeTruthy()
   })
 
   test("reset_var ne peut remettre a zero les props utilisé a communiquer, si l'ennemi ne l'a pas appelé", async () => {
@@ -156,11 +147,11 @@ describe('Mission.vue', () => {
 
     wrapper.vm.reset_vars(true)
 
-    expect(wrapper.vm.resetP).toBeTruthy
-    expect(wrapper.vm.resetE).toBeFalsy
+    expect(wrapper.vm.resetP).toBeTruthy()
+    expect(wrapper.vm.resetE).toBeFalsy()
 
-    expect(wrapper.vm.enemyShouldAttack).toBeTruthy
-    expect(wrapper.vm.playerShouldAttack).toBeTruthy
+    expect(wrapper.vm.enemyShouldAttack).toBeTruthy()
+    expect(wrapper.vm.playerShouldAttack).toBeTruthy()
     expect(wrapper.vm.damageToPlayer).toBe(300)
     expect(wrapper.vm.damageToEnemy).toBe(300)
   })
@@ -180,11 +171,11 @@ describe('Mission.vue', () => {
 
     wrapper.vm.reset_vars(false)
 
-    expect(wrapper.vm.resetP).toBeFalsy
-    expect(wrapper.vm.resetE).toBeTruthy
+    expect(wrapper.vm.resetP).toBeFalsy()
+    expect(wrapper.vm.resetE).toBeTruthy()
 
-    expect(wrapper.vm.enemyShouldAttack).toBeTruthy
-    expect(wrapper.vm.playerShouldAttack).toBeTruthy
+    expect(wrapper.vm.enemyShouldAttack).toBeTruthy()
+    expect(wrapper.vm.playerShouldAttack).toBeTruthy()
     expect(wrapper.vm.damageToPlayer).toBe(300)
     expect(wrapper.vm.damageToEnemy).toBe(300)
   })
@@ -205,11 +196,11 @@ describe('Mission.vue', () => {
     wrapper.vm.reset_vars(false)
     wrapper.vm.reset_vars(true)
 
-    expect(wrapper.vm.resetP).toBeFalsy
-    expect(wrapper.vm.resetE).toBeFalsy
+    expect(wrapper.vm.resetP).toBeFalsy()
+    expect(wrapper.vm.resetE).toBeFalsy()
 
-    expect(wrapper.vm.enemyShouldAttack).toBeFalsy
-    expect(wrapper.vm.playerShouldAttack).toBeFalsy
+    expect(wrapper.vm.enemyShouldAttack).toBeFalsy()
+    expect(wrapper.vm.playerShouldAttack).toBeFalsy()
     expect(wrapper.vm.damageToPlayer).toBe(-1)
     expect(wrapper.vm.damageToEnemy).toBe(-1)
   })

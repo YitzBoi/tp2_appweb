@@ -19,6 +19,7 @@
           v-bind:doAttack="playerShouldAttack"
           v-bind:damage="damageToPlayer"
           v-bind:credit="credit"
+          v-bind:shouldRepair="shouldRepair"
           @end_mission="end_mission"
           @player-attack="attack_enemy"
           @died="aCharacterWasKilled"
@@ -64,6 +65,7 @@ export default {
       resetP: false,
       resetE: false,
       credit: 0,
+      shouldRepair: false,
       roundNb: 1,
       score: 0
     }
@@ -118,11 +120,12 @@ export default {
       })
     },
     repair_ship () {
-      this.$refs.playerStatsComponent.repair()
+      this.shouldRepair = true
     },
     reset_vars (isPlayer) {
       if (isPlayer) {
         this.resetP = true
+        this.shouldRepair = false
       } else {
         this.resetE = true
       }
