@@ -1,13 +1,14 @@
 import { shallowMount } from '@vue/test-utils'
 import Mission from '@/views/Mission.vue'
-import PlayerStatsComponent from '@/components/PlayerStatsComponent'
 import flushPromises from 'flush-promises'
 import { scoresService } from '@/services/scoresService'
+import { resetAllWhenMocks } from 'jest-when'
 
 jest.mock('@/services/scoresService')
 
 beforeEach(() => {
   jest.clearAllMocks()
+  resetAllWhenMocks()
   scoresService.postScore.mockResolvedValue(true)
 })
 
@@ -53,10 +54,22 @@ describe('Mission.vue', () => {
   })
 
   test('End_mission doit finir la partie quand il atteint le nombre maximum de rounds.', async () => {
-    const methodMock = jest.fn()
+    const msgBoxOk = jest.fn()
+    const pushMock = jest.fn()
+
     const wrapper = await shallowMount(Mission, {
-      methods: {
-        game_ended: methodMock
+      mocks: {
+        $bvModal: {
+          msgBoxOk: () => msgBoxOk()
+        },
+        $router: {
+          push: () => pushMock()
+        },
+        $route: {
+          params: {
+            playerName: 'Jeffery Epstein'
+          }
+        }
       }
     })
     await flushPromises()
@@ -68,7 +81,7 @@ describe('Mission.vue', () => {
     await wrapper.vm.end_mission()
 
     expect(wrapper.vm.roundNb).toBe(5)
-    expect(methodMock).toHaveBeenCalled()
+    expect(wrapper.vm.gameHasEnded).toBeTruthy()
   })
 
   test('Game_over doit finir la partie et afficher une boite de texte.', async () => {
@@ -205,18 +218,80 @@ describe('Mission.vue', () => {
     expect(wrapper.vm.damageToEnemy).toBe(-1)
   })
 
-  test('aCharacterWasKilled appele gameover si le joueur est mort', async () => {
-    const wrapper = await shallowMount(Mission)
+  test('aCharacterWasKilled fait un appel sur gameover si le joueur est mort', async () => {
+    const msgBoxOk = jest.fn()
+    const pushMock = jest.fn()
+
+    const wrapper = await shallowMount(Mission, {
+      mocks: {
+        $bvModal: {
+          msgBoxOk: () => msgBoxOk()
+        },
+        $router: {
+          push: () => pushMock()
+        },
+        $route: {
+          params: {
+            playerName: 'Jeffery Epstein'
+          }
+        }
+      }
+    })
+
     await flushPromises()
+
+    await wrapper.vm.aCharacterWasKilled(true)
+
+    expect(msgBoxOk).toHaveBeenCalled()
+    expect(pushMock).toHaveBeenCalled()
   })
 
   test("aCharacterWasKilled donne une récompense au joueur si l'ennemi est mort", async () => {
+    const EXPECTED_CREDIT = 50
     const wrapper = await shallowMount(Mission)
+
     await flushPromises()
+
+    await wrapper.vm.aCharacterWasKilled(false, EXPECTED_CREDIT)
+
+    expect(wrapper.vm.credit).toBe(EXPECTED_CREDIT)
   })
 
-  test('beforeRouteLeave can', async () => {
-    const wrapper = await shallowMount(Mission)
-    await flushPromises()
+  test("Doit rester sur la page après l'abandon de quitter la page", async () => {
+    const next = jest.fn()
+    const msgBoxConfirm = jest.fn().mockResolvedValue(false)
+    const wrapper = await shallowMount(Mission, {
+      mocks: {
+        $router: {
+          push: () => {}
+        },
+        $bvModal: {
+          msgBoxConfirm: () => msgBoxConfirm()
+        }
+      }
+    })
+    await Mission.beforeRouteLeave.call(wrapper.vm, undefined, undefined, next)
+
+    expect(next).toHaveBeenCalledTimes(0)
+    expect(msgBoxConfirm).toHaveBeenCalledTimes(1)
+  })
+
+  test('Doit quitter la page après avoir confirmé', async () => {
+    const next = jest.fn()
+    const msgBoxConfirm = jest.fn().mockResolvedValue(true)
+    const wrapper = await shallowMount(Mission, {
+      mocks: {
+        $router: {
+          push: () => {}
+        },
+        $bvModal: {
+          msgBoxConfirm: () => msgBoxConfirm()
+        }
+      }
+    })
+    await Mission.beforeRouteLeave.call(wrapper.vm, undefined, undefined, next)
+
+    expect(next).toHaveBeenCalled()
+    expect(msgBoxConfirm).toHaveBeenCalledTimes(1)
   })
 })
