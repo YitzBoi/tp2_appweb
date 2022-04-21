@@ -53,6 +53,16 @@ describe('Mission.vue', () => {
     expect(wrapper.vm.roundNb).toBe(2)
   })
 
+  test('End_mission mettre à jour les crédits du joueur', async () => {
+    const EXPECTED_CREDIT = 50
+    const wrapper = await shallowMount(Mission)
+    await flushPromises()
+
+    wrapper.vm.end_mission(EXPECTED_CREDIT)
+
+    expect(wrapper.vm.credit).toBe(EXPECTED_CREDIT)
+  })
+
   test('End_mission doit finir la partie quand il atteint le nombre maximum de rounds.', async () => {
     const msgBoxOk = jest.fn()
     const pushMock = jest.fn()

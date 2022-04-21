@@ -60,6 +60,7 @@ export default {
       playerShouldAttack: false,
       enemyShouldAttack: false,
       gameHasEnded: false,
+      missionEnded: false,
       damageToEnemy: -1,
       damageToPlayer: -1,
       resetP: false,
@@ -75,8 +76,10 @@ export default {
   },
   methods: {
     launch_fight () {
-      this.enemyShouldAttack = true
-      this.playerShouldAttack = true
+      if (!this.missionEnded) {
+        this.enemyShouldAttack = true
+        this.playerShouldAttack = true
+      }
     },
     attack_enemy (nb) {
       this.damageToEnemy = nb
@@ -84,8 +87,11 @@ export default {
     attack_player (nb) {
       this.damageToPlayer = nb
     },
-    end_mission () {
+    end_mission (credit) {
       this.reset_vars(false)
+      if (credit) {
+        this.credit = credit
+      }
       if (this.roundNb === 5) this.game_ended()
       else {
         this.roundNb++
@@ -120,6 +126,7 @@ export default {
       })
     },
     repair_ship () {
+      this.hasRepaired = true
       this.shouldRepair = true
     },
     reset_vars (isPlayer) {
@@ -142,11 +149,8 @@ export default {
       if (isPlayer) {
         this.game_over()
       } else {
+        this.missionEnded = true
         this.credit += money
-        if (this.roundNb === 5) this.game_ended()
-        else {
-          this.roundNb++
-        }
       }
     }
   },

@@ -107,7 +107,7 @@ export default {
     },
     attack () {
       if (Math.floor(Math.random() * 101) < this.chance) {
-        this.$emit('player-attack', 3 + Math.floor(Math.random() * 4))
+        this.$emit('player-attack', 10 + Math.floor(Math.random() * 11))
       } else {
         this.$emit('player-attack', 0)
       }
@@ -118,7 +118,7 @@ export default {
         if (this.credit >= calculatedCost) {
           this.credit -= calculatedCost
           this.currentHealth = this.maxHealth
-          this.$emit('end_mission')
+          this.$emit('end_mission', this.credit)
         } else {
           await this.$bvModal.msgBoxOk(
             "Vous n'avez pas assez de CG pour réparer votre vaisseau.",

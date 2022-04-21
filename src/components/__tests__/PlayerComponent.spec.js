@@ -195,8 +195,8 @@ describe('PlayerStatsComponent.vue', () => {
     const value = wrapper.emitted('player-attack')[0]
 
     expect(wrapper.emitted('player-attack')).toBeTruthy()
-    expect(value[0]).toBeGreaterThanOrEqual(0)
-    expect(value[0]).toBeLessThanOrEqual(6)
+    expect(value[0]).toBeGreaterThanOrEqual(10)
+    expect(value[0]).toBeLessThanOrEqual(20)
   })
 
   test('Le joueur doit pouvoir partager son intention de reset ses props (et finir son tour) au parent', async () => {
