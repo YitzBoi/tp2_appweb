@@ -33,8 +33,21 @@ export default {
     }
   },
   async created () {
-    this.scores = await scoresService.getScores()
-    this.isLoading = false
+    try {
+      this.scores = await scoresService.getScores()
+      this.isLoading = false
+    } catch (error) {
+      await this.$bvModal.msgBoxOk(
+        'Une erreur est survenue, contactez un administrateur si elle persiste.',
+        {
+          okTitle: 'Ok',
+          bodyBgVariant: 'dark',
+          bodyTextVariant: 'success',
+          footerBgVariant: 'dark',
+          okVariant: 'success'
+        }
+      )
+    }
   }
 }
 </script>
