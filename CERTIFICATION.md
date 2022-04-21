@@ -4,10 +4,12 @@
 
 Nous, les membres de l’équipe, certifions que :
 
-- [nom coéquipier1] a contribué au travail pratique dans une proportion de [pourcentage].
-- [nom coéquipier2] a contribué au travail pratique dans une proportion de [pourcentage].
+- [Zackary G Tremblay] a contribué au travail pratique dans une proportion de [50%].
+- [Dave Tremblay] a contribué au travail pratique dans une proportion de [50%].
 
 ## Bonus développé
+
+Nous avons fait la réparation du vaisseau.
 
 ## Exemples de pourcentage
 
