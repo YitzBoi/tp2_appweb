@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import uiTextPlugin from '../externalization/uiTextPlugin'
 export default {
   props: {
     doAttack: {
@@ -47,15 +48,15 @@ export default {
     return {
       enemy: {
         id: 5188,
-        name: 'Default',
+        name: uiTextPlugin.Ship.DEFAULT_NAME,
         credit: 95,
         experience: 1,
-        ship: { id: 5380, name: 'Default', vitality: 100 }
+        ship: { id: 5380, name: uiTextPlugin.Ship.DEFAULT_NAME, vitality: 100 }
       },
-      chance: 0,
-      rank: '1',
-      maxHealth: 100,
-      currentHealth: 100
+      chance: uiTextPlugin.Ship.DEFAULT_CHANCE,
+      rank: uiTextPlugin.Ship.DEFAULT_RANK,
+      maxHealth: uiTextPlugin.Ship.DEFAULT_HEALTH,
+      currentHealth: uiTextPlugin.Ship.DEFAULT_HEALTH
     }
   },
   watch: {
@@ -94,20 +95,20 @@ export default {
       this.enemy = this.currentEnemy
       switch (this.enemy.experience) {
         case 1:
-          this.rank = 'Beginner'
-          this.chance = 20
+          this.rank = uiTextPlugin.Rank.RANK_1_NAME
+          this.chance = uiTextPlugin.Rank.RANK_1_CHANCE
           break
         case 2:
-          this.rank = 'Novice'
-          this.chance = 35
+          this.rank = uiTextPlugin.Rank.RANK_2_NAME
+          this.chance = uiTextPlugin.Rank.RANK_2_CHANCE
           break
         case 3:
-          this.rank = 'Experienced'
-          this.chance = 50
+          this.rank = uiTextPlugin.Rank.RANK_3_NAME
+          this.chance = uiTextPlugin.Rank.RANK_3_CHANCE
           break
         case 4:
-          this.rank = 'Master'
-          this.chance = 70
+          this.rank = uiTextPlugin.Rank.RANK_4_NAME
+          this.chance = uiTextPlugin.Rank.RANK_4_CHANCE
           break
       }
       this.currentHealth = this.enemy.ship.vitality

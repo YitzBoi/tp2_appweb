@@ -2,7 +2,7 @@
   <div class="container rounded box" id="mainDiv">
     <div class="row">
       <div id="name" class="rounded box-label">
-        <h3 style="color:#fff">Actions</h3>
+        <h3 style="color:#fff">{{ this.actionsLabel }}</h3>
       </div>
     </div>
     <div class="row align-self-stretch pb-5">
@@ -13,7 +13,7 @@
           class="btn btn-success w-100 h-100"
           id="launch_fight"
         >
-          Combattre
+          {{ this.fightButtonLabel }}
         </button>
       </div>
       <div class="col-4">
@@ -23,7 +23,7 @@
           class="btn btn-success w-100 h-100"
           id="end_mission"
         >
-          Terminer la mission
+          {{ this.endFightButtonLabel }}
         </button>
       </div>
       <div class="col-4">
@@ -33,7 +33,7 @@
           class="btn btn-success w-100 h-100"
           id="repair_ship"
         >
-          Terminer la mission et réparer le vaisseau
+          {{ this.endFightAndRepairButtonLabel }}
         </button>
       </div>
     </div>
@@ -41,7 +41,17 @@
 </template>
 
 <script>
+import uiTextPlugin from '../externalization/uiTextPlugin'
 export default {
+  data () {
+    return {
+      actionsLabel: uiTextPlugin.Actions.ACTIONS_LABEL,
+      fightButtonLabel: uiTextPlugin.Actions.FIGHT_BUTTON_LABEL,
+      endFightButtonLabel: uiTextPlugin.Actions.END_FIGHT_BUTTON_LABEL,
+      endFightAndRepairButtonLabel:
+        uiTextPlugin.Actions.END_FIGHT_AND_REPAIR_BUTTON_LABEL
+    }
+  },
   methods: {
     launch_fight: function () {
       this.$emit('launch_fight')

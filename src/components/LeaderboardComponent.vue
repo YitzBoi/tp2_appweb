@@ -23,11 +23,12 @@
 
 <script>
 import { scoresService } from '../services/scoresService.js'
+import uiTextPlugin from '../externalization/uiTextPlugin.js'
 export default {
   data () {
     return {
       scores: [],
-      isLoading: true
+      isLoading: uiTextPlugin.Menu.DEFAULT_IS_LOADING
     }
   },
   async created () {

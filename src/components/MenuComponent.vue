@@ -44,13 +44,14 @@
 
 <script>
 import { shipsService } from '../services/shipsService.js'
+import uiTextPlugin from '../externalization/uiTextPlugin.js'
 export default {
   data () {
     return {
       playerName: '',
       ships: [],
       ship: {},
-      isLoading: true
+      isLoading: uiTextPlugin.Menu.DEFAULT_IS_LOADING
     }
   },
   methods: {
