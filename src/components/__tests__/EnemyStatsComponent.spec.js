@@ -1,6 +1,9 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import EnemyComponent from '@/components/EnemyStatsComponent.vue'
 import flushPromises from 'flush-promises'
+import BootstrapVue from 'bootstrap-vue'
+import Vue from 'vue'
+Vue.use(BootstrapVue)
 
 describe('EnemyStatsComponent.vue', () => {
   test("Les informations de l'ennemi doivent apparaitre", async () => {
