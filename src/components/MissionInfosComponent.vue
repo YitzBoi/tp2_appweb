@@ -3,7 +3,7 @@
     <div class="row">
       <div id="name" class="rounded box-label">
         <h3 style="color:#fff">
-          Mission en cours
+          {{ this.missionLabel }}
         </h3>
       </div>
     </div>
@@ -32,7 +32,8 @@ export default {
   },
   data () {
     return {
-      maxRounds: uiTextPlugin.MissionInfos.MAX_ROUNDS
+      maxRounds: uiTextPlugin.MissionInfos.MAX_ROUNDS,
+      missionLabel: uiTextPlugin.Mission.MISSION_LABEL
     }
   }
 }

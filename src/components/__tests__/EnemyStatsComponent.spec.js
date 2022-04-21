@@ -2,6 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils'
 import EnemyComponent from '@/components/EnemyStatsComponent.vue'
 import flushPromises from 'flush-promises'
 import BootstrapVue from 'bootstrap-vue'
+import uiTextPlugin from '../../externalization/uiTextPlugin'
 import Vue from 'vue'
 Vue.use(BootstrapVue)
 
@@ -56,7 +57,7 @@ describe('EnemyStatsComponent.vue', () => {
 
     wrapper.vm.changeEnemy()
     // rank
-    expect(wrapper.text()).toContain('Beginner')
+    expect(wrapper.text()).toContain(uiTextPlugin.Rank.RANK_1_NAME)
   })
 
   test("Le rank 'Novice' doit afficher correctement", async () => {
@@ -80,7 +81,7 @@ describe('EnemyStatsComponent.vue', () => {
 
     wrapper.vm.changeEnemy()
     // rank
-    expect(wrapper.text()).toContain('Novice')
+    expect(wrapper.text()).toContain(uiTextPlugin.Rank.RANK_2_NAME)
   })
 
   test("Le rank 'Experienced' doit afficher correctement", async () => {
@@ -104,7 +105,7 @@ describe('EnemyStatsComponent.vue', () => {
 
     wrapper.vm.changeEnemy()
     // rank
-    expect(wrapper.text()).toContain('Experienced')
+    expect(wrapper.text()).toContain(uiTextPlugin.Rank.RANK_3_NAME)
   })
 
   test("Le rank 'Master' doit afficher correctement", async () => {
@@ -128,7 +129,7 @@ describe('EnemyStatsComponent.vue', () => {
 
     wrapper.vm.changeEnemy()
     // rank
-    expect(wrapper.text()).toContain('Master')
+    expect(wrapper.text()).toContain(uiTextPlugin.Rank.RANK_4_NAME)
   })
 
   test("La vie de l'ennemi doit exister et etre a 100% au debut", async () => {

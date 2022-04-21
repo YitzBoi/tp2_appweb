@@ -5,7 +5,7 @@
       class="w-50 mx-auto border rounded-lg border-success p-5 m-5"
       style="background-color: #202325"
     >
-      <h3 class="text-center">Leaderboard</h3>
+      <h3 class="text-center">{{ this.leaderboardLabel }}</h3>
       <ul class="topBorder">
         <li v-for="score in scores" v-bind:key="score.score">
           {{ score.name }} - {{ score.score }} CG
@@ -28,6 +28,7 @@ export default {
   data () {
     return {
       scores: [],
+      leaderboardLabel: uiTextPlugin.Leaderboard.LEADERBOARD_LABEL,
       isLoading: uiTextPlugin.Menu.DEFAULT_IS_LOADING
     }
   },

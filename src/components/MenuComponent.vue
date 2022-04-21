@@ -3,7 +3,7 @@
     class="container mx-auto border rounded-lg border-success p-5 m-5 text-white"
     style="background-color: #202325"
   >
-    <label class="row" style="color:#42b983">Votre nom:</label>
+    <label class="row" style="color:#42b983">{{ this.nameLabel }}</label>
     <input
       v-model="playerName"
       type="text"
@@ -11,7 +11,7 @@
       class="mb-5 row form-control border-success"
     />
 
-    <label class="row" style="color:#42b983">Votre vaisseau:</label>
+    <label class="row" style="color:#42b983">{{ this.shipLabel }}</label>
     <div>
       <select
         class="mb-5 row form-control border-success"
@@ -37,7 +37,7 @@
     />
 
     <button @click="sendToMission()" v-else class="btn btn-success m-3">
-      Débuter la partie
+      {{ this.startButtonLabel }}
     </button>
   </div>
 </template>
@@ -51,7 +51,10 @@ export default {
       playerName: '',
       ships: [],
       ship: {},
-      isLoading: uiTextPlugin.Menu.DEFAULT_IS_LOADING
+      isLoading: uiTextPlugin.Menu.DEFAULT_IS_LOADING,
+      nameLabel: uiTextPlugin.Menu.NAME_LABEL,
+      shipLabel: uiTextPlugin.Menu.SHIP_LABEL,
+      startButtonLabel: uiTextPlugin.Menu.START_BUTTON_LABEL
     }
   },
   methods: {
