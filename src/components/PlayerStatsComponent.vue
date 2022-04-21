@@ -40,6 +40,10 @@ export default {
     },
     credit: {
       type: Number
+    },
+    shouldRepair: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -84,6 +88,12 @@ export default {
         this.was_attacked(this.damage)
         this.$emit('reset-vars', true)
       }
+    },
+    shouldRepair: function () {
+      if (this.shouldRepair === true) {
+        this.repair()
+        this.$emit('reset-vars', true)
+      }
     }
   },
   methods: {
@@ -110,7 +120,7 @@ export default {
           this.currentHealth = this.maxHealth
           this.$emit('end_mission')
         } else {
-          this.$bvModal.msgBoxOk(
+          await this.$bvModal.msgBoxOk(
             "Vous n'avez pas assez de CG pour réparer votre vaisseau.",
             {
               okTitle: 'Ok',
@@ -122,7 +132,7 @@ export default {
           )
         }
       } else {
-        this.$bvModal.msgBoxOk("Votre vaisseau n'est pas endommagé!", {
+        await this.$bvModal.msgBoxOk("Votre vaisseau n'est pas endommagé!", {
           okTitle: 'Ok',
           bodyBgVariant: 'dark',
           bodyTextVariant: 'success',

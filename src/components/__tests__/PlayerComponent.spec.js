@@ -1,6 +1,15 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import PlayerComponent from '@/components/PlayerStatsComponent.vue'
 import flushPromises from 'flush-promises'
+import BootstrapVue from 'bootstrap-vue'
+import { resetAllWhenMocks } from 'jest-when'
+import Vue from 'vue'
+Vue.use(BootstrapVue)
+
+beforeEach(() => {
+  jest.clearAllMocks()
+  resetAllWhenMocks()
+})
 
 describe('PlayerStatsComponent.vue', () => {
   test('Le informations du joueur doivent apparaitre', async () => {
@@ -27,6 +36,10 @@ describe('PlayerStatsComponent.vue', () => {
       rank: 'master'
     })
 
+    await wrapper.setProps({
+      credit: 0
+    })
+
     await flushPromises()
 
     // nom
@@ -40,6 +53,7 @@ describe('PlayerStatsComponent.vue', () => {
   })
 
   test('La vie du joueur doit exister et etre a 100% au debut', async () => {
+    Vue.use(BootstrapVue)
     const wrapper = await mount(PlayerComponent, {
       mocks: {
         $router: {
@@ -143,7 +157,7 @@ describe('PlayerStatsComponent.vue', () => {
     })
 
     await wrapper.setProps({
-      reward: 100
+      credit: 100
     })
 
     await flushPromises()
@@ -243,5 +257,95 @@ describe('PlayerStatsComponent.vue', () => {
 
     expect(wrapper.emitted('died')).toBeTruthy()
     expect(value[0]).toBeTruthy()
+  })
+
+  test('Le vaisseau doit se réparer lorsque la méthode repair est appelée', async () => {
+    const wrapper = await mount(PlayerComponent, {
+      mocks: {
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await wrapper.setProps({
+      credit: 1000
+    })
+
+    await flushPromises()
+
+    wrapper.vm.was_attacked(10)
+    await wrapper.vm.repair()
+
+    const lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(100)
+  })
+
+  test('Le vaisseau ne doit pas se réparer lorsque la méthode repair est appelée avec un nombre de credits trop bas', async () => {
+    const wrapper = await mount(PlayerComponent, {
+      mocks: {
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await flushPromises()
+
+    await wrapper.setProps({
+      credit: 0
+    })
+
+    wrapper.vm.was_attacked(10)
+    wrapper.vm.repair()
+
+    const lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(90)
+  })
+
+  test('Le vaisseau ne doit pas se réparer lorsque la méthode repair est appelée avec avec des points de vie au maximum', async () => {
+    const wrapper = await mount(PlayerComponent, {
+      mocks: {
+        $route: {
+          params: {
+            playerName: 'nom',
+            ship: {
+              id: 9030,
+              name: 'Executor',
+              attackpower: 95
+            }
+          }
+        }
+      }
+    })
+
+    await flushPromises()
+
+    await wrapper.setProps({
+      credit: 500
+    })
+
+    wrapper.vm.repair()
+
+    const lifeBar = wrapper.vm.currentHealth
+    // credit
+    expect(lifeBar).toBe(100)
+    expect(wrapper.vm.credit).toBe(500)
   })
 })
